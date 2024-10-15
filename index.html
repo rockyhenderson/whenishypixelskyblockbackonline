@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When is Hypixel Skyblock Back Online?</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        #countdown {
+            font-size: 48px;
+        }
+        #message {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="message">Hypixel Skyblock is back online in</div>
+        <div id="countdown"></div>
+    </div>
+
+    <script>
+        // Hardcoded variable to force display "Hypixel Skyblock is online"
+        const isOnline = false; // Change this to true to force the "online" message
+
+        // Set the server return time in UTC (example: October 18, 2024, 16:00:00 UTC)
+        const returnDateUTC = new Date(Date.UTC(2024, 9, 18, 16, 0, 0)); // Adjust this for the countdown time
+
+        // Get the countdown display element
+        const countdownElement = document.getElementById("countdown");
+        const messageElement = document.getElementById("message");
+
+        // Check if we should display "Hypixel Skyblock is online" immediately
+        if (isOnline) {
+            messageElement.innerHTML = "Hypixel Skyblock is online";
+            countdownElement.style.display = "none"; // Hide the countdown
+        } else {
+            // Update the countdown every second
+            const interval = setInterval(function() {
+                const now = new Date().getTime();  // Current time in user's timezone
+                const distance = returnDateUTC.getTime() - now;  // Time difference
+
+                if (distance < 0) {
+                    clearInterval(interval);
+                    messageElement.innerHTML = "Hypixel Skyblock is online";
+                    countdownElement.style.display = "none"; // Hide the countdown
+                    return;
+                }
+
+                // Time calculations (hours, minutes, seconds)
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the countdown
+                countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
