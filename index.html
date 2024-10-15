@@ -33,7 +33,7 @@
 
     <script>
         // Fetch the configuration from config.json
-        fetch('config.json')
+        fetch('data/config.json')
         .then(response => response.json())
         .then(config => {
             const isOnline = config.isOnline;  // Read the isOnline value from config
